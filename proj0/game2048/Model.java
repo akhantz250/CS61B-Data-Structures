@@ -5,7 +5,7 @@ import java.util.Observable;
 
 
 /** The state of a game of 2048.
- *  @author TODO: YOUR NAME HERE
+ *  @author Aung Khant Zaw
  */
 public class Model extends Observable {
     /** Current contents of the board. */
@@ -94,7 +94,7 @@ public class Model extends Observable {
         setChanged();
     }
 
-    /** Tilt the board toward SIDE. Return true iff this changes the board.
+    /**  Tilt the board toward SIDE. Return true iff this changes the board.
      *
      * 1. If two Tile objects are adjacent in the direction of motion and have
      *    the same value, they are merged into one Tile of twice the original
@@ -138,7 +138,17 @@ public class Model extends Observable {
      * */
     public static boolean emptySpaceExists(Board b) {
         // TODO: Fill in this function.
-        return false;
+        boolean isEmpty = false;
+        outerloop:
+        for (int c = 0; c < b.size(); c++ ){
+            for ( int r = 0; r < b.size(); r++){
+                if (b.tile(c,r) == null){
+                    isEmpty = true;
+                    break outerloop;
+                }
+            }
+        }
+        return isEmpty;
     }
 
     /**
@@ -148,7 +158,21 @@ public class Model extends Observable {
      */
     public static boolean maxTileExists(Board b) {
         // TODO: Fill in this function.
-        return false;
+        boolean isMax = false;
+        outerloop:
+        for (int c = 0; c < b.size(); c++ ) {
+            for (int r = 0; r < b.size(); r++) {
+                Tile tile = b.tile(c,r);
+                if (tile == null) {
+                    continue;
+                }
+                if (tile.value() == MAX_PIECE) {
+                    isMax = true;
+                    break outerloop;
+                }
+            }
+        }
+        return isMax;
     }
 
     /**

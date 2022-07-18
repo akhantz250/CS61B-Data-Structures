@@ -4,7 +4,7 @@ import static game2048.Side.*;
 
 /** The input/output and GUI controller for play of a game of 2048.
  *  @author P. N. Hilfinger. */
-public class Game {
+public class  Game {
 
     /** Controller for a game represented by MODEL, using SOURCE as the
      *  the source of key inputs and random Tiles. */
