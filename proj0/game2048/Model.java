@@ -113,7 +113,55 @@ public class Model extends Observable {
         // TODO: Modify this.board (and perhaps this.score) to account
         // for the tilt to the Side SIDE. If the board changed, set the
         // changed local variable to true.
+       board.setViewingPerspective(side);
+       int size = this.board.size();
+       for (int c = 0; c < size; c++) {
+           boolean prevTileMerged = false;
+           int prevValue = 0;
+           int prevPos = size - 1;
+           Tile currentTile = this.board.tile(c, size - 1);
+           if (currentTile != null) { prevValue = currentTile.value();}
 
+            // for rows below the top row
+           for (int r = size - 2; r >= 0 ; r--) {
+              currentTile = this.board.tile(c,r);
+              int currentTileValue = 0;
+              if (currentTile == null) {continue;}
+              else {currentTileValue = currentTile.value();}
+
+              // first row was empty
+               if (prevValue == 0) {
+                   this.board.move(c, prevPos, currentTile);
+                   prevValue = currentTileValue;
+                   prevTileMerged = false;
+                   changed = true;
+               } else if (prevValue == currentTileValue && !prevTileMerged) {
+                   this.board.move(c,prevPos,currentTile);
+                   changed = true;
+                   prevValue *= 2;
+                   prevTileMerged = true;
+                   this.score += prevValue;
+               } else if (prevValue == currentTileValue && prevTileMerged) {
+                   this.board.move(c,prevPos - 1,currentTile);
+                   prevValue = currentTileValue;
+                   prevPos -= 1;
+                   prevTileMerged = false;
+                   changed = true;
+               }  // move tile when there is at least a gap
+               else if (prevValue != currentTileValue && r < prevPos - 1){
+                   this.board.move(c,prevPos - 1,currentTile);
+                   prevValue = currentTileValue;
+                   prevPos -= 1;
+                   prevTileMerged = false;
+                   changed = true;
+               } else {
+                   prevValue = currentTileValue;
+                   prevPos -= 1;
+                   prevTileMerged = false;
+               }
+           }
+       }
+       board.setViewingPerspective(Side.NORTH);
         checkGameOver();
         if (changed) {
             setChanged();
