@@ -156,12 +156,12 @@ public class LinkedListDequeTest {
         lst.addFirst(2);
         lst.addFirst(1);
         lst.addLast(4);
-        int secondItem = lst.getRecursively(1);
-        int thridItem = lst.getRecursively(2);
+        int secondItem = lst.getRecursive(1);
+        int thridItem = lst.getRecursive(2);
         assertEquals(2, secondItem);
         assertEquals(3, thridItem);
-        assertNull(lst.getRecursively(4));
-        assertNull(lst.getRecursively(-1));
+        assertNull(lst.getRecursive(4));
+        assertNull(lst.getRecursive(-1));
     }
     @Test
     public void EmptyTest() {
