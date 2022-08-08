@@ -190,7 +190,6 @@ public class LinkedListDequeTest {
         assertEquals(1, removed);
         assertEquals(3, lst.size());
         lst.printDeque();
-        lst.printDequeReverse();
     }
 
     @Test
@@ -204,7 +203,6 @@ public class LinkedListDequeTest {
         assertEquals(4, removed);
         assertEquals(3, lst.size());
         lst.printDeque();
-        lst.printDequeReverse();
     }
 
     @Test

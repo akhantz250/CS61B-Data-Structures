@@ -3,7 +3,7 @@ package deque;
 import java.util.Iterator;
 
 public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
-    public class Node {
+    private class Node {
         public T item;
         public Node next;
         public Node prev;
@@ -56,15 +56,6 @@ public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
         while (p != sentinel) {
             System.out.print(p.item + " ");
             p = p.next;
-        }
-        System.out.println();
-    }
-
-    public void printDequeReverse() {
-        Node p = this.sentinel.prev;
-        while (p != sentinel) {
-            System.out.print(p.item + " ");
-            p = p.prev;
         }
         System.out.println();
     }

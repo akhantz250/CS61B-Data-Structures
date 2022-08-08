@@ -3,25 +3,25 @@ package deque;
 import java.util.Iterator;
 
 public interface Deque<T> {
-    public void addFirst(T x);
+    void addFirst(T x);
 
-    public void addLast(T x);
+    void addLast(T x);
 
-    public T removeFirst();
+    T removeFirst();
 
-    public T removeLast();
+    T removeLast();
 
-    public T get(int n);
+    T get(int n);
 
-    public int size();
+    int size();
 
-    public void printDeque();
+    void printDeque();
 
-    default public boolean isEmpty() {
+    default boolean isEmpty() {
         return this.size() == 0;
     }
 
-    public Iterator<T> iterator();
+    Iterator<T> iterator();
 
-    public boolean equals(Object o);
+    boolean equals(Object o);
 }

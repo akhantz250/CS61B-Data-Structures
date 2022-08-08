@@ -64,9 +64,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
         int n = itemsArray.length;
-        if (n > 8 && (size < n / 4 )) {
-            resize(n / 4 );
-        }
         int pos = (((nextLast - 1) % n) + n) % n;
         T removed = itemsArray[pos];
         itemsArray[pos] = null;
@@ -81,9 +78,6 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
         int n = itemsArray.length;
-        if (n > 8 && (size < n / 4 )) {
-            resize(n / 4 );
-        }
         int pos = (((nextFirst + 1) % n) + n) % n;
         T removed = itemsArray[pos];
         itemsArray[pos] = null;
