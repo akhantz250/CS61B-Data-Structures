@@ -197,4 +197,14 @@ public class LinkedListDequeTest {
         lst.printDeque();
         lst.printDequeReverse();
     }
+    @Test
+    public void LinkedListIteration() {
+        LinkedListDeque<Integer> lst = new LinkedListDeque<>();
+        lst.addLast(1);
+        lst.addLast(2);
+        lst.addLast(3);
+        for(int i: lst) {
+            System.out.println(i);
+        }
+    }
 }

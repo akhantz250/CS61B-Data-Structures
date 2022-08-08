@@ -143,5 +143,15 @@ public class ArrayDequeTest {
         assertEquals(5000,aLst.size());
         aLst.printDeque();
     }
+    @Test
+    public void IterationTest() {
+        ArrayDeque<Integer> aLst = new ArrayDeque<>();
+        aLst.addLast(1);
+        aLst.addLast(2);
+        aLst.addLast(3);
+        for (int i: aLst) {
+            System.out.println(i);
+        }
+    }
 }
 
