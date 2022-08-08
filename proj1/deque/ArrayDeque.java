@@ -1,8 +1,9 @@
 package deque;
 
 
+import java.util.Iterator;
 
-public class ArrayDeque<Type> implements Deque<Type> {
+public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
     private Type[] itemsArray = (Type[]) new Object[8];
     private int size;
     private int nextFirst;
@@ -112,5 +113,27 @@ public class ArrayDeque<Type> implements Deque<Type> {
         }
         System.out.print(itemsArray[last]);
         System.out.println();
+    }
+    @Override
+    public Iterator<Type> iterator() {
+        return new ArrayDequeIterator();
+    }
+
+    private class ArrayDequeIterator implements Iterator<Type> {
+        private int pos;
+        public ArrayDequeIterator() {
+            pos = 0;
+        }
+        @Override
+        public boolean hasNext() {
+            return pos < size;
+        }
+
+        @Override
+        public Type next() {
+            Type item = ArrayDeque.this.get(pos);
+            pos += 1;
+            return item;
+        }
     }
 }
