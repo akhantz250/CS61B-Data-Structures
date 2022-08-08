@@ -8,5 +8,8 @@ public interface Deque<Type> {
     public Type get(int n);
     public int size();
     public void printDeque();
-    public boolean isEmpty();
+
+    default public boolean isEmpty() {
+        return this.size() == 0;
+    }
 }

@@ -94,10 +94,7 @@ public class ArrayDeque<Type> implements Deque<Type> {
         int pos = (((first + x) % n) + n) % n;
         return  itemsArray[pos];
     }
-    @Override
-    public boolean isEmpty() {
-        return size == 0;
-    }
+
     @Override
     public int size(){
         return size;

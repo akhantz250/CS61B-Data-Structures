@@ -42,10 +42,6 @@ public class LinkedListDeque<Type> implements Deque<Type> {
         return size;
     }
     @Override
-    public boolean isEmpty() {
-        return this.sentinel.next == this.sentinel;
-    }
-    @Override
     public void printDeque() {
         Node p = this.sentinel.next;
         while (p != sentinel) {
