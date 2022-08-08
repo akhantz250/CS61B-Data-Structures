@@ -3,8 +3,8 @@ package deque;
 
 import java.util.Iterator;
 
-public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
-    private Type[] itemsArray = (Type[]) new Object[8];
+public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
+    private T[] itemsArray = (T[]) new Object[8];
     private int size;
     private int nextFirst;
     private int nextLast;
@@ -13,7 +13,7 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
         this.nextLast = 0;
         this.nextFirst = 7;
     }
-    public void addLast(Type x) {
+    public void addLast(T x) {
         int n = itemsArray.length;
         if (size == n) {
             resize(size * 2);
@@ -24,7 +24,7 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
         size++;
     }
     @Override
-    public void addFirst(Type x) {
+    public void addFirst(T x) {
         int n = itemsArray.length;
         if (size == n) {
             resize(size * 2);
@@ -38,7 +38,7 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
         int n = itemsArray.length;
         int first = (((nextFirst + 1) % n) + n) % n;
         int last = (((nextLast - 1) % n) + n) % n;
-        Type[] newArray = (Type[]) new Object[capacity];
+        T[] newArray = (T[]) new Object[capacity];
         if (first < last) {
          System.arraycopy(itemsArray,first,newArray,0,size);
         } else {
@@ -54,7 +54,7 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
     }
     @Override
     // Change last index and size
-    public Type removeLast() {
+    public T removeLast() {
         if (size == 0) {
             return null;
         }
@@ -63,14 +63,14 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
             resize(n / 4 );
         }*/
         int pos = (((nextLast - 1) % n) + n) % n;
-        Type removed = itemsArray[pos];
+        T removed = itemsArray[pos];
         itemsArray[pos] = null;
         nextLast = pos;
         size--;
         return removed;
     }
     @Override
-    public Type removeFirst() {
+    public T removeFirst() {
         if (size == 0) {
             return null;
         }
@@ -79,14 +79,14 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
             resize(n / 4 );
         }*/
         int pos = (((nextFirst + 1) % n) + n) % n;
-        Type removed = itemsArray[pos];
+        T removed = itemsArray[pos];
         itemsArray[pos] = null;
         nextFirst = pos;
         size--;
         return removed;
     }
     @Override
-    public Type get(int x) {
+    public T get(int x) {
         if (x < 0 || x >= size) {
             return null;
         }
@@ -115,7 +115,7 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
         System.out.println();
     }
     @Override
-    public Iterator<Type> iterator() {
+    public Iterator<T> iterator() {
         return new ArrayDequeIterator();
     }
 
@@ -130,13 +130,13 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
         if (!(obj instanceof ArrayDeque<?>)) {
             return false;
         }
-        ArrayDeque<Type> other = (ArrayDeque<Type>) obj;
+        ArrayDeque<T> other = (ArrayDeque<T>) obj;
         if (other.size() != this.size()) {
             return false;
         }
         for (int i = 0; i < this.size(); i++) {
-            Type otherVal = other.get(i);
-            Type thisVal = this.get(i);
+            T otherVal = other.get(i);
+            T thisVal = this.get(i);
             if (!thisVal.equals(otherVal)) {
                 return false;
             }
@@ -144,7 +144,7 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
         return true;
     }
 
-    private class ArrayDequeIterator implements Iterator<Type> {
+    private class ArrayDequeIterator implements Iterator<T> {
         private int pos;
         public ArrayDequeIterator() {
             pos = 0;
@@ -155,8 +155,8 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
         }
 
         @Override
-        public Type next() {
-            Type item = ArrayDeque.this.get(pos);
+        public T next() {
+            T item = ArrayDeque.this.get(pos);
             pos += 1;
             return item;
         }

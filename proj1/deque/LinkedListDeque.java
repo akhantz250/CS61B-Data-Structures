@@ -2,13 +2,13 @@ package deque;
 
 import java.util.Iterator;
 
-public class LinkedListDeque<Type> implements Deque<Type>, Iterable<Type> {
+public class LinkedListDeque<T> implements Deque<T>, Iterable<T> {
     public class Node {
-        public Type item;
+        public T item;
         public Node next;
         public Node prev;
 
-        public Node(Type item, Node next, Node prev) {
+        public Node(T item, Node next, Node prev) {
             this.item = item;
             this.next = next;
             this.prev = prev;
@@ -26,14 +26,14 @@ public class LinkedListDeque<Type> implements Deque<Type>, Iterable<Type> {
         size = 0;
     }
     @Override
-    public void addFirst(Type item) {
+    public void addFirst(T item) {
         Node newNode = new Node(item,sentinel.next,sentinel);
         newNode.next.prev = newNode;
         sentinel.next = newNode;
         size++;
     }
     @Override
-    public void addLast(Type item) {
+    public void addLast(T item) {
         Node newNode = new Node(item, sentinel,sentinel.prev);
         newNode.prev.next = newNode;
         sentinel.prev = newNode;
@@ -62,7 +62,7 @@ public class LinkedListDeque<Type> implements Deque<Type>, Iterable<Type> {
     }
     @Override
     // get n - 1th item in deque
-    public Type get(int n) {
+    public T get(int n) {
         if (n < 0 || n > size - 1) {
             return null;
         }
@@ -73,10 +73,10 @@ public class LinkedListDeque<Type> implements Deque<Type>, Iterable<Type> {
         }
         return p.item;
     }
-    public Type getRecursively (int n) {
+    public T getRecursively (int n) {
       return getRecursiveHelper(n, sentinel.next);
     }
-    private Type getRecursiveHelper(int n, Node p) {
+    private T getRecursiveHelper(int n, Node p) {
         // Base case
         if (n > size - 1 || n < 0) {
             return null;
@@ -87,22 +87,22 @@ public class LinkedListDeque<Type> implements Deque<Type>, Iterable<Type> {
         return getRecursiveHelper(n - 1, p.next);
     }
     @Override
-    public Type removeFirst() {
+    public T removeFirst() {
         if (sentinel.next == sentinel) {
             return null;
         }
-        Type removed = sentinel.next.item;
+        T removed = sentinel.next.item;
         sentinel.next.next.prev = sentinel;
         sentinel.next = sentinel.next.next;
         size--;
         return removed;
     }
     @Override
-    public Type removeLast(){
+    public T removeLast(){
         if (sentinel.prev == sentinel) {
             return null;
         }
-        Type removed = sentinel.prev.item;
+        T removed = sentinel.prev.item;
         sentinel.prev.prev.next = sentinel;
         sentinel.prev = sentinel.prev.prev;
         size--;
@@ -120,13 +120,13 @@ public class LinkedListDeque<Type> implements Deque<Type>, Iterable<Type> {
         if (!(obj instanceof LinkedListDeque<?>)) {
             return false;
         }
-        LinkedListDeque<Type> other = (LinkedListDeque<Type>) obj;
+        LinkedListDeque<T> other = (LinkedListDeque<T>) obj;
         if (other.size() != this.size()) {
             return false;
         }
         for (int i = 0; i < this.size(); i++) {
-            Type otherVal = other.get(i);
-            Type thisVal = this.get(i);
+            T otherVal = other.get(i);
+            T thisVal = this.get(i);
             if (!thisVal.equals(otherVal)) {
                 return false;
             }
@@ -135,10 +135,10 @@ public class LinkedListDeque<Type> implements Deque<Type>, Iterable<Type> {
     }
 
     @Override
-    public Iterator<Type> iterator() {
+    public Iterator<T> iterator() {
         return new LinkedListIterator();
     }
-    private class LinkedListIterator implements Iterator<Type> {
+    private class LinkedListIterator implements Iterator<T> {
         private int pos;
         public LinkedListIterator() {
             pos = 0;
@@ -149,8 +149,8 @@ public class LinkedListDeque<Type> implements Deque<Type>, Iterable<Type> {
         }
 
         @Override
-        public Type next() {
-            Type item = LinkedListDeque.this.get(pos);
+        public T next() {
+            T item = LinkedListDeque.this.get(pos);
             pos += 1;
             return item;
         }
