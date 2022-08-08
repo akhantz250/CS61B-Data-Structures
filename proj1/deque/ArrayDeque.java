@@ -119,6 +119,31 @@ public class ArrayDeque<Type> implements Deque<Type>, Iterable<Type> {
         return new ArrayDequeIterator();
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj) {
+            return true;
+        }
+        if (obj == null) {
+            return false;
+        }
+        if (!(obj instanceof ArrayDeque<?>)) {
+            return false;
+        }
+        ArrayDeque<Type> other = (ArrayDeque<Type>) obj;
+        if (other.size() != this.size()) {
+            return false;
+        }
+        for (int i = 0; i < this.size(); i++) {
+            Type otherVal = other.get(i);
+            Type thisVal = this.get(i);
+            if (!thisVal.equals(otherVal)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
     private class ArrayDequeIterator implements Iterator<Type> {
         private int pos;
         public ArrayDequeIterator() {

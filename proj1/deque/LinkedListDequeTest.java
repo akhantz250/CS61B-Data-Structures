@@ -207,4 +207,16 @@ public class LinkedListDequeTest {
             System.out.println(i);
         }
     }
+    @Test
+    public void LinkedListEqualityTest() {
+        LinkedListDeque<Integer> list1 = new LinkedListDeque<>();
+        LinkedListDeque<Integer> list2 = new LinkedListDeque<>();
+        list1.addLast(1);
+        list1.addLast(2);
+        list1.addLast(3);
+        list2.addLast(1);
+        list2.addLast(2);
+        list2.addLast(3);
+        assertTrue(list1.equals(list2));
+    }
 }

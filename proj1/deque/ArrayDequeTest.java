@@ -153,5 +153,29 @@ public class ArrayDequeTest {
             System.out.println(i);
         }
     }
+    @Test
+    public void EqualityTest1() {
+        ArrayDeque<Integer> list1 = new ArrayDeque<>();
+        ArrayDeque<Integer> list2 = new ArrayDeque<>();
+        list1.addLast(1);
+        list1.addLast(2);
+        list1.addLast(3);
+        list2.addLast(1);
+        list2.addLast(2);
+        list2.addLast(3);
+        assertTrue(list1.equals(list2));
+    }
+    @Test
+    public void EqualityTest2() {
+        ArrayDeque<Integer> list1 = new ArrayDeque<>();
+        ArrayDeque<String> list2 = new ArrayDeque<>();
+        list1.addLast(1);
+        list1.addLast(2);
+        list1.addLast(3);
+        list2.addLast("Bob");
+        list2.addLast("Alice");
+        list2.addLast("Charlie");
+        assertFalse(list1.equals(list2));
+    }
 }
 
