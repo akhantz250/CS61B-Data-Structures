@@ -204,5 +204,21 @@ public class ArrayDequeTest {
         list2.addLast(3);
         assertTrue(list1.equals(list2));
     }
+    @Test
+    public void ShrinkingWorksProperly() {
+        ArrayDeque<Integer> list1 = new ArrayDeque<>();
+        for (int i = 1; i <= 5000; i++) {
+            int operationNumber = (int) (Math.random() * 2 + 1);
+            if (operationNumber == 1) {
+                list1.addLast(i);
+            } else {
+                list1.addFirst(i);
+            }
+        }
+        for (int i = 1; i<= 4800; i++) {
+            list1.removeLast();
+        }
+        list1.printDeque();
+    }
 }
 

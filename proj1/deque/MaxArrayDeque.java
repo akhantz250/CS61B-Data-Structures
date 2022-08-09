@@ -11,7 +11,8 @@ public class MaxArrayDeque<T> extends ArrayDeque<T> {
 
     // uses the default comparator given in the constructor
     public T max() {
-        // write out the logic that iterates through the array using the default comparator's compare method
+        /* write out the logic that iterates through
+        the array using the default comparator's compare method */
         return max(defaultComparator);
     }
 
