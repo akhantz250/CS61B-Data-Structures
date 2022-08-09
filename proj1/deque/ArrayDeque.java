@@ -17,7 +17,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     public void addLast(T x) {
         int n = itemsArray.length;
-        if (size == n ) {
+        if (size == n) {
             resize(size * 2);
             n = itemsArray.length;
         }
@@ -38,17 +38,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         size++;
     }
 
-    // the resize method works correctly for expanding the array.
-    // doesn't work yet with shrinking the array.
     private void resize(int capacity) {
-        int n = itemsArray.length;
-        if (capacity > n) {
-            expand(capacity);
-        } else {
-            shrink(capacity);
-        }
-    }
-    private void expand(int capacity) {
         int n = itemsArray.length;
         int first = (((nextFirst + 1) % n) + n) % n;
         int last = (((nextLast - 1) % n) + n) % n;
@@ -57,30 +47,17 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             System.arraycopy(itemsArray, first, newArray, 0, size);
         } else {
             // len from first to end, ie the second part of the array
-            int x = size - first;
+            int x = n - first;
             System.arraycopy(itemsArray, first, newArray, 0, x);
             System.arraycopy(itemsArray, 0, newArray, x, last + 1);
         }
         // reset the indexes of nextFirst and nextLast
-        nextLast = n;
-        nextFirst = newArray.length - 1;
-        itemsArray = newArray;
-    }
-    private void shrink(int capacity) {
-        int n = itemsArray.length;
-        int first = (((nextFirst + 1) % n) + n) % n;
-        int last = (((nextLast - 1) % n) + n) % n;
-        T[] newArray = (T[]) new Object[capacity];
-        if (first < last) {
-            System.arraycopy(itemsArray, first, newArray, 0, size);
+        if (capacity > n) {
+            nextLast = n;
         } else {
-            // copy first to n to front of the new array
-            int x = n - first;
-            System.arraycopy(itemsArray, first, newArray, 0, x);
-            // copy index 0 to last after pos x in new array
-            System.arraycopy(itemsArray, 0, newArray, x, last + 1);
+            nextLast = size;
         }
-        nextLast = size;
+
         nextFirst = newArray.length - 1;
         itemsArray = newArray;
     }
@@ -95,6 +72,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (size < 0.2 * n && n > 8) {
             resize(n / 4);
         }
+        n = itemsArray.length;
         int pos = (((nextLast - 1) % n) + n) % n;
         T removed = itemsArray[pos];
         itemsArray[pos] = null;
@@ -112,6 +90,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
         if (size < 0.2 * n && n > 8) {
             resize(n / 4);
         }
+        n = itemsArray.length;
         int pos = (((nextFirst + 1) % n) + n) % n;
         T removed = itemsArray[pos];
         itemsArray[pos] = null;
