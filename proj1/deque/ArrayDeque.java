@@ -17,7 +17,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
 
     public void addLast(T x) {
         int n = itemsArray.length;
-        if (size == n) {
+        if (size == n ) {
             resize(size * 2);
             n = itemsArray.length;
         }
@@ -92,7 +92,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
         int n = itemsArray.length;
-        if (size < 0.2 * n) {
+        if (size < 0.2 * n && n > 8) {
             resize(n / 4);
         }
         int pos = (((nextLast - 1) % n) + n) % n;
@@ -109,6 +109,9 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
             return null;
         }
         int n = itemsArray.length;
+        if (size < 0.2 * n && n > 8) {
+            resize(n / 4);
+        }
         int pos = (((nextFirst + 1) % n) + n) % n;
         T removed = itemsArray[pos];
         itemsArray[pos] = null;
@@ -181,7 +184,7 @@ public class ArrayDeque<T> implements Deque<T>, Iterable<T> {
     private class ArrayDequeIterator implements Iterator<T> {
         private int pos;
 
-        public ArrayDequeIterator() {
+        ArrayDequeIterator() {
             pos = 0;
         }
 
